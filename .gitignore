@@ -1,0 +1,11 @@
+node_modules/
+node_modules.old/
+dist/
+.next/
+.vinext/
+.wrangler/
+.env
+.env.local
+*.log
+*.tsbuildinfo
+site-package.tar.gz
