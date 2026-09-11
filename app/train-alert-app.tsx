@@ -101,6 +101,7 @@ export function TrainAlertApp() {
         </button>
         <div className="header-actions">
           <span className="live-pill"><i /> Checking every 2 min</span>
+          <ThemeToggle />
           <button className="avatar" onClick={() => setView("settings")} aria-label="Open settings">{member.displayName.slice(0, 2).toUpperCase()}</button>
         </div>
       </header>
@@ -152,6 +153,26 @@ function LoadingScreen() {
   return <div className="loading-screen"><span className="brand-mark large"><span>TA</span></span><p>Checking the tracks…</p></div>;
 }
 
+function ThemeToggle({ access = false }: { access?: boolean }) {
+  function toggleTheme() {
+    const root = document.documentElement;
+    const next = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = next;
+    root.style.colorScheme = next;
+    localStorage.setItem("trainalert-theme", next);
+    document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta) => {
+      meta.content = next === "dark" ? "#08130f" : "#0b4f3c";
+    });
+  }
+
+  return (
+    <button className={access ? "theme-toggle access-theme" : "theme-toggle"} type="button" onClick={toggleTheme} aria-label="Switch color theme" title="Switch color theme">
+      <span className="theme-sun" aria-hidden="true">☀</span>
+      <span className="theme-moon" aria-hidden="true">☾</span>
+    </button>
+  );
+}
+
 function AccessScreen({ configured, error, onSubmit }: { configured: boolean; error: string; onSubmit: (kind: "setup" | "invite", token: string, displayName: string) => void }) {
   const hash = typeof window !== "undefined" ? new URLSearchParams(location.hash.replace(/^#/, "")) : new URLSearchParams();
   const inviteToken = hash.get("invite") || "";
@@ -161,6 +182,7 @@ function AccessScreen({ configured, error, onSubmit }: { configured: boolean; er
   const [name, setName] = useState("");
   return (
     <main className="access-page">
+      <ThemeToggle access />
       <section className="access-copy">
         <span className="eyebrow">NIGERIAN TRAIN SEAT WATCHER</span>
         <h1>Don’t refresh all day.<br /><em>Catch the seat.</em></h1>

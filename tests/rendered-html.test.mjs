@@ -20,3 +20,14 @@ test("service worker provides the two requested actions", async () => {
   assert.match(source, /action: "end", title: "End alert"/);
   assert.doesNotMatch(source, /notificationclose/);
 });
+
+test("ships a persistent light and dark color theme", async () => {
+  const [layout, app, styles] = await Promise.all([
+    readFile(new URL("../app/layout.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/train-alert-app.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+  assert.match(app, /trainalert-theme/);
+  assert.match(layout, /prefers-color-scheme: dark/);
+  assert.match(styles, /data-theme="dark"/);
+});
