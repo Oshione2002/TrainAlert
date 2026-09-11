@@ -31,3 +31,10 @@ test("ships a persistent light and dark color theme", async () => {
   assert.match(layout, /prefers-color-scheme: dark/);
   assert.match(styles, /data-theme="dark"/);
 });
+
+test("uses one two-millimetre corner radius throughout", async () => {
+  const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  const radii = styles.match(/border-radius:\s*[^;]+/g) || [];
+  assert.match(styles, /--radius:\s*2mm/);
+  assert.ok(radii.length > 0 && radii.every((radius) => radius.includes("var(--radius)")));
+});
