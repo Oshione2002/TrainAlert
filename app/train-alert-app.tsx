@@ -1,6 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import { LuBellRing } from "react-icons/lu";
+import { SiTelegram } from "react-icons/si";
 import type { RouteGroup, Trip, WatchTargetInput, WatchView } from "@/lib/types";
 
 type Member = { id: string; displayName: string; role: "owner" | "member" };
@@ -332,8 +334,8 @@ function Settings({ member, channels, onChanged, onNotice, onError }: { member: 
   }
   return <section className="form-page narrow"><div className="form-heading"><span className="eyebrow">DELIVERY</span><h1>Notification settings</h1><p>Use both channels so an opening is hard to miss.</p></div>
     <div className="setting-list">
-      <article><span className="setting-icon">↗</span><div><h3>Telegram</h3><p>Fast bot messages with Book now and End alert buttons.</p></div><span className={channels.telegram ? "connected" : "not-connected"}>{channels.telegram ? "Connected" : "Not connected"}</span><button className="secondary small" onClick={connectTelegram}>{channels.telegram ? "Reconnect" : "Connect"}</button></article>
-      <article><span className="setting-icon">●</span><div><h3>Phone notifications</h3><p>Native alerts even when TrainAlert is closed.</p></div><span className={channels.push ? "connected" : "not-connected"}>{channels.push ? "Connected" : "Not connected"}</span><button className="secondary small" onClick={enablePush}>{channels.push ? "Refresh" : "Enable"}</button></article>
+      <article><span className="setting-icon" aria-hidden="true"><SiTelegram /></span><div><h3>Telegram</h3><p>Fast bot messages with Book now and End alert buttons.</p></div><span className={channels.telegram ? "connected" : "not-connected"}>{channels.telegram ? "Connected" : "Not connected"}</span><button className="secondary small" onClick={connectTelegram}>{channels.telegram ? "Reconnect" : "Connect"}</button></article>
+      <article><span className="setting-icon" aria-hidden="true"><LuBellRing /></span><div><h3>Phone notifications</h3><p>Native alerts even when TrainAlert is closed.</p></div><span className={channels.push ? "connected" : "not-connected"}>{channels.push ? "Connected" : "Not connected"}</span><button className="secondary small" onClick={enablePush}>{channels.push ? "Refresh" : "Enable"}</button></article>
     </div>
     <div className="profile-card"><span className="avatar large-avatar">{member.displayName.slice(0,2).toUpperCase()}</span><div><span className="eyebrow">THIS DEVICE</span><h3>{member.displayName}</h3><p>{member.role === "owner" ? "Owner access" : "Invited member"}</p></div></div>
   </section>;

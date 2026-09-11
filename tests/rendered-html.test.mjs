@@ -32,9 +32,16 @@ test("ships a persistent light and dark color theme", async () => {
   assert.match(styles, /data-theme="dark"/);
 });
 
-test("uses one two-millimetre corner radius throughout", async () => {
+test("uses square corners throughout", async () => {
   const styles = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   const radii = styles.match(/border-radius:\s*[^;]+/g) || [];
-  assert.match(styles, /--radius:\s*2mm/);
+  assert.match(styles, /--radius:\s*0/);
   assert.ok(radii.length > 0 && radii.every((radius) => radius.includes("var(--radius)")));
+});
+
+test("uses proper Telegram and phone notification icons", async () => {
+  const app = await readFile(new URL("../app/train-alert-app.tsx", import.meta.url), "utf8");
+  assert.match(app, /SiTelegram/);
+  assert.match(app, /LuBellRing/);
+  assert.doesNotMatch(app, /className="setting-icon">[↗●]/);
 });

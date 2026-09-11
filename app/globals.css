@@ -11,7 +11,7 @@
   --muted: #68766f;
   --line: #dbe2dc;
   --orange: #f2a65a;
-  --radius: 2mm;
+  --radius: 0;
 }
 
 :root[data-theme="dark"] {
@@ -153,6 +153,7 @@ input:focus, select:focus { border-color: var(--forest); box-shadow: 0 0 0 3px r
 .setting-list { display: grid; gap: 12px; }
 .setting-list article { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); padding: 19px; display: grid; grid-template-columns: 45px 1fr auto auto; gap: 15px; align-items: center; }
 .setting-icon { width: 42px; height: 42px; display: grid; place-items: center; background: var(--mint); border-radius: var(--radius); color: var(--forest); font-weight: 900; }
+.setting-icon svg { width: 21px; height: 21px; }
 .setting-list h3 { margin: 0 0 4px; }
 .setting-list p { margin: 0; color: var(--muted); font-size: 12px; }
 .connected, .not-connected { font-size: 10px; font-weight: 850; text-transform: uppercase; padding: 6px 9px; border-radius: var(--radius); }
