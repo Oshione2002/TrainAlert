@@ -4,5 +4,5 @@
   "main": "worker.ts",
   "compatibility_date": "2026-09-11",
   "triggers": { "crons": ["*/2 * * * *"] },
-  "vars": { "APP_URL": "https://replace-with-your-trainalert-url" }
+  "vars": { "APP_URL": "https://trainalert-ng-oshione.alelumetreasure02.chatgpt.site" }
 }
